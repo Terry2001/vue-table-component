@@ -24,7 +24,7 @@
             </table>
         </div>
 
-    </div>
+        </div>
 </template>
 
 <script>
@@ -40,11 +40,11 @@
     export default {
         components: {
             TableColumnHeader,
-            TableRow,
+            TableRow
         },
 
         props: {
-            data: { default: () => [], type: [Array, Function] },
+            data: {default: () => [], type: [Array, Function]},
 
             showFilter: { default: true },
             showCaption: { default: true },
@@ -74,25 +74,59 @@
             localSettings: {},
         }),
 
+        created() {
+            this.sort.fieldName = this.sortBy;
+            this.sort.order = this.sortOrder;
+
+        },
+
         async mounted() {
             this.mapColumns();
 
             await this.mapDataToRows();
         },
 
+        watch: {
+
+            data() {
+                if (this.usesLocalData) {
+                    this.mapDataToRows();
+                }
+            },
+        },
+
         computed: {
             fullTableClass() {
                 return classList('', this.tableClass);
             },
+
+
+            ariaCaption() {
+                if (this.sort.fieldName === '') {
+                    return 'Table not sorted';
+                }
+
+                return `Table sorted by ${this.sort.fieldName} ` +
+                    (this.sort.order === 'asc' ? '(ascending)' : '(descending)');
+            },
+
             usesLocalData() {
                 return isArray(this.data);
             },
+
             displayedRows() {
                 return this.rows;
             },
 
         },
+
         methods: {
+            async pageChange(page) {
+                this.pagination.currentPage = page;
+
+                await this.mapDataToRows();
+            },
+
             async mapDataToRows() {
                 const data = this.usesLocalData
                     ? this.prepareLocalData()
@@ -107,6 +141,7 @@
                     })
                     .map(rowData => new Row(rowData, this.columns));
             },
+
             mapColumns() {
                 const columnComponents = this.$slots.default.filter(
                     column => column.componentInstance
@@ -118,20 +153,35 @@
 
                 columnComponents.forEach(column => {
                     Object.keys(this.$options.props).forEach(
-                        prop => this.$watch(prop, () => this.mapColumns())
+                         prop => this.$watch(prop, () => this.mapColumns())
                     );
                 });
-
             },
+
             prepareLocalData() {
                 this.pagination = null;
 
                 return this.data;
             },
-            async fetchServerData() {
-                return null;
-            },
-        },
 
+            async fetchServerData() {
+                const page = this.pagination && this.pagination.currentPage || 1;
+
+                const response = await this.data({
+                    filter: this.filter,
+                    sort: this.sort,
+                    page: page,
+                });
+
+                this.pagination = response.pagination;
+
+                return response.data;
+            },
+
+            async refresh() {
+                await this.mapDataToRows();
+            },
+
+        },
     };
 </script>
