@@ -15,7 +15,7 @@ export default {
         }
 
         data.domProps = {};
-        data.domProps.innerHTML = props.column.formatter(props.row.getValue(props.column.show), props.row.data);
+        data.domProps.innerHTML = props.column.formatter(props.row.getValue(props.column.field), props.row.data);
 
         return createElement('td', data);
     },

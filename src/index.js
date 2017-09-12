@@ -1,13 +1,11 @@
 import TableComponent from './components/TableComponent';
 import TableColumn from './components/TableColumn';
-import Pagination from './components/Pagination';
 import { mergeSettings } from './settings';
 
 export default {
     install(Vue) {
         Vue.component('table-component', TableComponent);
         Vue.component('table-column', TableColumn);
-        Vue.component('pagination', Pagination);
     },
 
     settings(settings) {
@@ -16,3 +14,12 @@ export default {
 };
 
 export { TableComponent, TableColumn };
+
+export function install(Vue, options) {
+    Vue.component('table-component', TableComponent);
+    Vue.component('table-column', TableColumn);
+}
+
+if (typeof window !== 'undefined' && window['Vue']) {
+    window['Vue'].use(install);
+}

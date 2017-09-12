@@ -1,13 +1,9 @@
 <template>
-    <th
-        @click="clicked"
-        :class="headerClass"
+    <th @click="clicked"
         role="columnheader"
         scope="col"
-        :aria-sort="ariaSort"
-        :aria-disabled="ariaDisabled"
         v-if="this.isVisible"
-    >
+        :class="thClass">
         {{ label }}
     </th>
 </template>
@@ -19,36 +15,16 @@
         props: ['column', 'sort'],
 
         computed: {
-            ariaDisabled() {
-                if (! this.column.isSortable()) {
-                    return 'true';
-                }
-
-                return false;
-            },
-
             ariaSort() {
                 if (! this.column.isSortable()) {
                     return false;
                 }
 
-                if (this.column.show !== this.sort.fieldName) {
-                    return 'none';
+                if (this.column.field === this.sort.fieldName) {
+                    return true;
                 }
 
-                return this.sort.order === 'asc' ? 'ascending' : 'descending';
-            },
-
-            headerClass() {
-                if (! this.column.isSortable()) {
-                    return classList('table-component__th', this.column.headerClass);
-                }
-
-                if (this.column.show !== this.sort.fieldName) {
-                    return classList('table-component__th table-component__th--sort', this.column.headerClass);
-                }
-
-                return classList(`table-component__th table-component__th--sort-${this.sort.order}`, this.column.headerClass);
+                return false;
             },
 
             isVisible() {
@@ -57,10 +33,23 @@
 
             label() {
                 if (this.column.label === null) {
-                    return this.column.show;
+                    return this.column.field;
                 }
 
                 return this.column.label;
+            },
+
+            thClass() {
+
+                if (! this.column.isSortable()) {
+                    return "";
+                }
+
+                if (this.column.field === this.sort.fieldName) {
+                    return "active " + (this.sort.order === 'asc' ? "sorting_asc" : "sorting_desc");
+                }
+
+                return "sorting";
             },
         },
 

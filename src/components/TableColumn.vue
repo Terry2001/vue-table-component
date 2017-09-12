@@ -11,7 +11,7 @@
 
     export default {
         props: {
-            show: { required: false, type: String },
+            field: { required: false, type: String },
             label: { default: null, type: String },
             dataType: { default: 'string', type: String },
 

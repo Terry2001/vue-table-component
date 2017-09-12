@@ -1,13 +1,13 @@
 <template>
     <div class="row">
         <div class="table-container">
-            <table :class="fullTableClass">
+            <table :id="tableId" :class="fullTableClass" >
                 <thead>
                 <tr>
                     <table-column-header
-                            @click="changeSorting"
+                            @click="columnHeaderClick"
                             v-for="column in columns"
-                            :key="column.show"
+                            :key="column.field"
                             :sort="sort"
                             :column="column"
                     ></table-column-header>
@@ -22,6 +22,10 @@
                 ></table-row>
                 </tbody>
             </table>
+        </div>
+
+        <div style="display:none;">
+            <slot></slot>
         </div>
 
         </div>
@@ -44,6 +48,7 @@
         },
 
         props: {
+            tableId: {default: ""},
             data: {default: () => [], type: [Array, Function]},
 
             showFilter: { default: true },
@@ -121,16 +126,8 @@
         },
 
         methods: {
-            async pageChange(page) {
-                this.pagination.currentPage = page;
-
-                await this.mapDataToRows();
-            },
-
             async mapDataToRows() {
-                const data = this.usesLocalData
-                    ? this.prepareLocalData()
-                    : await this.fetchServerData();
+                const data = this.data;
 
                 let rowId = 0;
 
@@ -150,32 +147,18 @@
                 this.columns = columnComponents.map(
                     column => new Column(column.componentInstance)
                 );
-
-                columnComponents.forEach(column => {
-                    Object.keys(this.$options.props).forEach(
-                         prop => this.$watch(prop, () => this.mapColumns())
-                    );
-                });
             },
 
-            prepareLocalData() {
-                this.pagination = null;
+            columnHeaderClick(column) {
 
-                return this.data;
-            },
+                if (this.sort.fieldName !== column.field) {
+                    this.sort.fieldName = column.field;
+                    this.sort.order = 'asc';
+                } else {
+                    this.sort.order = (this.sort.order === 'asc' ? 'desc' : 'asc');
+                }
 
-            async fetchServerData() {
-                const page = this.pagination && this.pagination.currentPage || 1;
-
-                const response = await this.data({
-                    filter: this.filter,
-                    sort: this.sort,
-                    page: page,
-                });
-
-                this.pagination = response.pagination;
-
-                return response.data;
+                this.$emit("sort", this.sort.fieldName, this.sort.order);
             },
 
             async refresh() {
