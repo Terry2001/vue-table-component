@@ -42,14 +42,14 @@
             thClass() {
 
                 if (! this.column.isSortable()) {
-                    return "";
+                    return classList(this.column.headerClass);
                 }
 
                 if (this.column.field === this.sort.fieldName) {
-                    return "active " + (this.sort.order === 'asc' ? "sorting_asc" : "sorting_desc");
+                    return classList(this.column.headerClass, "active " + (this.sort.order === 'asc' ? "sorting_asc" : "sorting_desc"));
                 }
 
-                return "sorting";
+                return classList(this.column.headerClass, "sorting");
             },
         },
 

@@ -2103,7 +2103,7 @@ var Component = __webpack_require__(28)(
   /* script */
   __webpack_require__(80),
   /* template */
-  __webpack_require__(214),
+  __webpack_require__(216),
   /* styles */
   null,
   /* scopeId */
@@ -2111,7 +2111,7 @@ var Component = __webpack_require__(28)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\github\\my-vue-table-component\\src\\components\\TableColumn.vue"
+Component.options.__file = "D:\\github\\vue-table-component\\src\\components\\TableColumn.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TableColumn.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -2122,9 +2122,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-15a3f871", Component.options)
+    hotAPI.createRecord("data-v-48f0d948", Component.options)
   } else {
-    hotAPI.reload("data-v-15a3f871", Component.options)
+    hotAPI.reload("data-v-48f0d948", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2143,7 +2143,7 @@ var Component = __webpack_require__(28)(
   /* script */
   __webpack_require__(82),
   /* template */
-  __webpack_require__(217),
+  __webpack_require__(215),
   /* styles */
   null,
   /* scopeId */
@@ -2151,7 +2151,7 @@ var Component = __webpack_require__(28)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\github\\my-vue-table-component\\src\\components\\TableComponent.vue"
+Component.options.__file = "D:\\github\\vue-table-component\\src\\components\\TableComponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TableComponent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -2162,9 +2162,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c7d52e9c", Component.options)
+    hotAPI.createRecord("data-v-2dbe61e7", Component.options)
   } else {
-    hotAPI.reload("data-v-c7d52e9c", Component.options)
+    hotAPI.reload("data-v-2dbe61e7", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -2284,15 +2284,17 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             thClass: function thClass() {
 
+                alert(this.column.headerClass);
+
                 if (!this.column.isSortable()) {
-                    return "";
+                    return (0, _helpers.classList)(this.column.headerClass);
                 }
 
                 if (this.column.field === this.sort.fieldName) {
-                    return "active " + (this.sort.order === 'asc' ? "sorting_asc" : "sorting_desc");
+                    return (0, _helpers.classList)(this.column.headerClass, "active " + (this.sort.order === 'asc' ? "sorting_asc" : "sorting_desc"));
                 }
 
-                return "sorting";
+                return (0, _helpers.classList)(this.column.headerClass, "sorting");
             }
         },
 
@@ -7365,7 +7367,7 @@ var Component = __webpack_require__(28)(
   /* script */
   __webpack_require__(81),
   /* template */
-  __webpack_require__(216),
+  __webpack_require__(217),
   /* styles */
   null,
   /* scopeId */
@@ -7373,7 +7375,7 @@ var Component = __webpack_require__(28)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\github\\my-vue-table-component\\src\\components\\TableColumnHeader.vue"
+Component.options.__file = "D:\\github\\vue-table-component\\src\\components\\TableColumnHeader.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TableColumnHeader.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -7384,9 +7386,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6ce5bc44", Component.options)
+    hotAPI.createRecord("data-v-682da089", Component.options)
   } else {
-    hotAPI.reload("data-v-6ce5bc44", Component.options)
+    hotAPI.reload("data-v-682da089", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -7405,7 +7407,7 @@ var Component = __webpack_require__(28)(
   /* script */
   __webpack_require__(83),
   /* template */
-  __webpack_require__(215),
+  __webpack_require__(214),
   /* styles */
   null,
   /* scopeId */
@@ -7413,7 +7415,7 @@ var Component = __webpack_require__(28)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\github\\my-vue-table-component\\src\\components\\TableRow.vue"
+Component.options.__file = "D:\\github\\vue-table-component\\src\\components\\TableRow.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TableRow.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -7424,9 +7426,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3e3788cf", Component.options)
+    hotAPI.createRecord("data-v-1b8ccdc4", Component.options)
   } else {
-    hotAPI.reload("data-v-3e3788cf", Component.options)
+    hotAPI.reload("data-v-1b8ccdc4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -7438,21 +7440,6 @@ module.exports = Component.exports
 
 /***/ }),
 /* 214 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (false) ? _c('div', [_vm._t("default")], 2) : _vm._e()
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-15a3f871", module.exports)
-  }
-}
-
-/***/ }),
-/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7469,36 +7456,12 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-3e3788cf", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-1b8ccdc4", module.exports)
   }
 }
 
 /***/ }),
-/* 216 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (this.isVisible) ? _c('th', {
-    class: _vm.thClass,
-    attrs: {
-      "role": "columnheader",
-      "scope": "col"
-    },
-    on: {
-      "click": _vm.clicked
-    }
-  }, [_vm._v("\n    " + _vm._s(_vm.label) + "\n")]) : _vm._e()
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-6ce5bc44", module.exports)
-  }
-}
-
-/***/ }),
-/* 217 */
+/* 215 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7540,7 +7503,46 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-c7d52e9c", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-2dbe61e7", module.exports)
+  }
+}
+
+/***/ }),
+/* 216 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (false) ? _c('div', [_vm._t("default")], 2) : _vm._e()
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-48f0d948", module.exports)
+  }
+}
+
+/***/ }),
+/* 217 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (this.isVisible) ? _c('th', {
+    class: _vm.thClass,
+    attrs: {
+      "role": "columnheader",
+      "scope": "col"
+    },
+    on: {
+      "click": _vm.clicked
+    }
+  }, [_vm._v("\n    " + _vm._s(_vm.label) + "\n")]) : _vm._e()
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-682da089", module.exports)
   }
 }
 
