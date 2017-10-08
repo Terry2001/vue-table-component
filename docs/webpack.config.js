@@ -20,6 +20,7 @@ module.exports = merge(require('../webpack.base'), {
 
     devServer: {
         contentBase: __dirname,
+        host: "192.168.0.106",
         port: 2000,
     },
 });

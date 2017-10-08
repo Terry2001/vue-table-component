@@ -27,6 +27,8 @@
 
             cellClass: { default: settings.cellClass },
             headerClass: { default: settings.headerClass },
+
+            checkbox: { default: false, type: Boolean},
         },
     };
 </script>

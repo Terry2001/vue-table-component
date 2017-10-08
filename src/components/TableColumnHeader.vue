@@ -2,9 +2,16 @@
     <th @click="clicked"
         role="columnheader"
         scope="col"
-        v-if="this.isVisible"
+        v-if="this.isVisible && !this.isCheckbox"
         :class="thClass">
         {{ label }}
+    </th>
+    <th
+        role="columnheader"
+        scope="col"
+        v-else-if="this.isVisible && this.isCheckbox"
+        :class="thClass">
+        <input type="checkbox" id="cbMarkAll" v-model="checkSignal"/>
     </th>
 </template>
 
@@ -14,6 +21,11 @@
     export default {
         props: ['column', 'sort'],
 
+        data() {
+            return {
+                checkSignal: false,
+            }
+        },
         computed: {
             ariaSort() {
                 if (! this.column.isSortable()) {
@@ -29,6 +41,11 @@
 
             isVisible() {
                 return ! this.column.hidden;
+            },
+
+            isCheckbox() {
+
+                return this.column.checkbox;
             },
 
             label() {
@@ -59,6 +76,15 @@
                     this.$emit('click', this.column);
                 }
             },
+
+        },
+
+        watch: {
+
+            checkSignal: function(val){
+                this.$emit('checkbox-changed', val);
+            }
+
         },
     };
 </script>

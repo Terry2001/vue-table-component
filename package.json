@@ -7,7 +7,7 @@
   "scripts": {
     "start": "webpack-dev-server --config docs/webpack.config.js",
     "demo": "webpack --config docs/webpack.config.js",
-    "build": "webpack",
+    "build": "webpack & cp dist/index.js docs/index.js",
     "lint": "eslint src __tests__ --ext .js,.vue --fix; exit 0",
     "prepublish": "npm run test; npm run build",
     "test": "jest"

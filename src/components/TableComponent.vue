@@ -6,6 +6,7 @@
                 <tr>
                     <table-column-header
                             @click="columnHeaderClick"
+                            @checkbox-changed="checkboxChanged"
                             v-for="column in columns"
                             :key="column.field"
                             :sort="sort"
@@ -51,6 +52,8 @@
             tableId: {default: ""},
             data: {default: () => [], type: [Array, Function]},
 
+            keyField: {default: ""},
+
             showFilter: { default: true },
             showCaption: { default: true },
 
@@ -75,14 +78,12 @@
                 order: '',
             },
             pagination: null,
-
             localSettings: {},
         }),
 
         created() {
             this.sort.fieldName = this.sortBy;
             this.sort.order = this.sortOrder;
-
         },
 
         async mounted() {
@@ -159,6 +160,22 @@
                 }
 
                 this.$emit("sort", this.sort.fieldName, this.sort.order);
+            },
+
+            checkboxChanged(signal) {
+
+                const checkedItems = [];
+
+                if(signal){
+                    const data = this.data;
+                    const keyField = this.keyField;
+
+                    data.forEach(function(item){
+                        checkedItems.push(item[keyField]);
+                    });
+                }
+
+                this.$emit("mark-all", checkedItems);
             },
 
             async refresh() {

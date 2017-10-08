@@ -2227,7 +2227,9 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             hidden: { default: false, type: Boolean },
 
             cellClass: { default: _settings2.default.cellClass },
-            headerClass: { default: _settings2.default.headerClass }
+            headerClass: { default: _settings2.default.headerClass },
+
+            checkbox: { default: false, type: Boolean }
         }
     };
 });
@@ -2260,6 +2262,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     exports.default = {
         props: ['column', 'sort'],
 
+        data: function data() {
+            return {
+                checkSignal: false
+            };
+        },
+
         computed: {
             ariaSort: function ariaSort() {
                 if (!this.column.isSortable()) {
@@ -2275,6 +2283,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             isVisible: function isVisible() {
                 return !this.column.hidden;
             },
+            isCheckbox: function isCheckbox() {
+
+                return this.column.checkbox;
+            },
             label: function label() {
                 if (this.column.label === null) {
                     return this.column.field;
@@ -2283,8 +2295,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 return this.column.label;
             },
             thClass: function thClass() {
-
-                alert(this.column.headerClass);
 
                 if (!this.column.isSortable()) {
                     return (0, _helpers.classList)(this.column.headerClass);
@@ -2304,6 +2314,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                     this.$emit('click', this.column);
                 }
             }
+        },
+
+        watch: {
+
+            checkSignal: function checkSignal(val) {
+                this.$emit('checkbox-changed', val);
+            }
+
         }
     };
 });
@@ -2370,6 +2388,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                     return [];
                 }, type: [Array, Function] },
 
+            keyField: { default: "" },
+
             showFilter: { default: true },
             showCaption: { default: true },
 
@@ -2395,7 +2415,6 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                     order: ''
                 },
                 pagination: null,
-
                 localSettings: {}
             };
         },
@@ -2512,6 +2531,21 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
                 }
 
                 this.$emit("sort", this.sort.fieldName, this.sort.order);
+            },
+            checkboxChanged: function checkboxChanged(signal) {
+
+                var checkedItems = [];
+
+                if (signal) {
+                    var data = this.data;
+                    var keyField = this.keyField;
+
+                    data.forEach(function (item) {
+                        checkedItems.push(item[keyField]);
+                    });
+                }
+
+                this.$emit("mark-all", checkedItems);
             },
             refresh: function () {
                 var _ref3 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
@@ -2633,7 +2667,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         function Column(columnComponent) {
             (0, _classCallCheck3.default)(this, Column);
 
-            var properties = (0, _pick2.default)(columnComponent, ['field', 'label', 'dataType', 'sortable', 'sortBy', 'filterable', 'filterOn', 'hidden', 'formatter', 'cellClass', 'headerClass']);
+            var properties = (0, _pick2.default)(columnComponent, ['field', 'label', 'dataType', 'sortable', 'sortBy', 'filterable', 'filterOn', 'hidden', 'formatter', 'cellClass', 'headerClass', 'checkbox']);
 
             for (var property in properties) {
                 this[property] = columnComponent[property];
@@ -7482,7 +7516,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "column": column
       },
       on: {
-        "click": _vm.columnHeaderClick
+        "click": _vm.columnHeaderClick,
+        "checkbox-changed": _vm.checkboxChanged
       }
     })
   }))]), _vm._v(" "), _c('tbody', _vm._l((_vm.displayedRows), function(row) {
@@ -7527,7 +7562,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return (this.isVisible) ? _c('th', {
+  return (this.isVisible && !this.isCheckbox) ? _c('th', {
     class: _vm.thClass,
     attrs: {
       "role": "columnheader",
@@ -7536,7 +7571,45 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "click": _vm.clicked
     }
-  }, [_vm._v("\n    " + _vm._s(_vm.label) + "\n")]) : _vm._e()
+  }, [_vm._v("\n    " + _vm._s(_vm.label) + "\n")]) : (this.isVisible && this.isCheckbox) ? _c('th', {
+    class: _vm.thClass,
+    attrs: {
+      "role": "columnheader",
+      "scope": "col"
+    }
+  }, [_c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.checkSignal),
+      expression: "checkSignal"
+    }],
+    attrs: {
+      "type": "checkbox",
+      "id": "cbMarkAll"
+    },
+    domProps: {
+      "checked": Array.isArray(_vm.checkSignal) ? _vm._i(_vm.checkSignal, null) > -1 : (_vm.checkSignal)
+    },
+    on: {
+      "__c": function($event) {
+        var $$a = _vm.checkSignal,
+          $$el = $event.target,
+          $$c = $$el.checked ? (true) : (false);
+        if (Array.isArray($$a)) {
+          var $$v = null,
+            $$i = _vm._i($$a, $$v);
+          if ($$el.checked) {
+            $$i < 0 && (_vm.checkSignal = $$a.concat($$v))
+          } else {
+            $$i > -1 && (_vm.checkSignal = $$a.slice(0, $$i).concat($$a.slice($$i + 1)))
+          }
+        } else {
+          _vm.checkSignal = $$c
+        }
+      }
+    }
+  })]) : _vm._e()
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

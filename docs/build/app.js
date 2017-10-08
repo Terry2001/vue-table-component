@@ -17687,6 +17687,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         value: true
     });
     exports.TableColumn = exports.TableComponent = undefined;
+    exports.install = install;
 
     var _TableComponent2 = _interopRequireDefault(_TableComponent);
 
@@ -17709,6 +17710,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
     };
     exports.TableComponent = _TableComponent2.default;
     exports.TableColumn = _TableColumn2.default;
+    function install(Vue, options) {
+        Vue.component('table-component', _TableComponent2.default);
+        Vue.component('table-column', _TableColumn2.default);
+    }
+
+    if (typeof window !== 'undefined' && window['Vue']) {
+        window['Vue'].use(install);
+    }
 });
 
 /***/ }),
@@ -27960,14 +27969,14 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             thClass: function thClass() {
 
                 if (!this.column.isSortable()) {
-                    return "";
+                    return (0, _helpers.classList)(this.column.headerClass);
                 }
 
                 if (this.column.field === this.sort.fieldName) {
-                    return "active " + (this.sort.order === 'asc' ? "sorting_asc" : "sorting_desc");
+                    return (0, _helpers.classList)(this.column.headerClass, "active " + (this.sort.order === 'asc' ? "sorting_asc" : "sorting_desc"));
                 }
 
-                return "sorting";
+                return (0, _helpers.classList)(this.column.headerClass, "sorting");
             }
         },
 
@@ -33241,7 +33250,7 @@ var Component = __webpack_require__(29)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\github\\my-vue-table-component\\src\\components\\TableColumn.vue"
+Component.options.__file = "D:\\github\\vue-table-component\\src\\components\\TableColumn.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TableColumn.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -33281,7 +33290,7 @@ var Component = __webpack_require__(29)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\github\\my-vue-table-component\\src\\components\\TableColumnHeader.vue"
+Component.options.__file = "D:\\github\\vue-table-component\\src\\components\\TableColumnHeader.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TableColumnHeader.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -33321,7 +33330,7 @@ var Component = __webpack_require__(29)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\github\\my-vue-table-component\\src\\components\\TableComponent.vue"
+Component.options.__file = "D:\\github\\vue-table-component\\src\\components\\TableComponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TableComponent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -33361,7 +33370,7 @@ var Component = __webpack_require__(29)(
   /* moduleIdentifier (server only) */
   null
 )
-Component.options.__file = "D:\\github\\my-vue-table-component\\src\\components\\TableRow.vue"
+Component.options.__file = "D:\\github\\vue-table-component\\src\\components\\TableRow.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] TableRow.vue: functional components are not supported with templates, they should use render functions.")}
 
