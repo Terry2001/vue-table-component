@@ -11,7 +11,7 @@
         scope="col"
         v-else-if="this.isVisible && this.isCheckbox"
         :class="thClass">
-        <input type="checkbox" id="cbMarkAll" v-model="checkSignal"/>
+        <input type="checkbox" :id="this.markAllCheckBoxId" v-model="checkSignal"/>
     </th>
 </template>
 
@@ -46,6 +46,11 @@
             isCheckbox() {
 
                 return this.column.checkbox;
+            },
+
+            markAllCheckBoxId(){
+
+                return this.column.field ? this.column.field + "_cbMarkAll" : "cbMarkAll";
             },
 
             label() {
