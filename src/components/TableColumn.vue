@@ -26,9 +26,12 @@
             hidden: { default: false, type: Boolean },
 
             cellClass: { default: settings.cellClass },
+
             headerClass: { default: settings.headerClass },
 
             checkbox: { default: false, type: Boolean},
+
+            checkboxId: { default: "cbMarkAll", type: String},
         },
     };
 </script>

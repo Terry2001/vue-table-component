@@ -177,7 +177,7 @@
             @sort="sortChanged"
             @mark-all="markAll2"
         >
-            <table-column field="my2" :sortable="false" :checkbox="true" label="check">
+            <table-column :sortable="false" :checkbox="true" checkbox-id="cbMarkAll_2" label="check">
                 <template scope="artist">
                     <input type="checkbox" :value="artist.firstName" v-model="checkedItems2"/>
                 </template>

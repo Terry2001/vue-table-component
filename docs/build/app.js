@@ -27911,9 +27911,12 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             hidden: { default: false, type: Boolean },
 
             cellClass: { default: _settings2.default.cellClass },
+
             headerClass: { default: _settings2.default.headerClass },
 
-            checkbox: { default: false, type: Boolean }
+            checkbox: { default: false, type: Boolean },
+
+            checkboxId: { default: "cbMarkAll", type: String }
         }
     };
 });
@@ -27973,7 +27976,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
             },
             markAllCheckBoxId: function markAllCheckBoxId() {
 
-                return this.column.field ? this.column.field + "_cbMarkAll" : "cbMarkAll";
+                return this.column.checkboxId ? this.column.checkboxId : "cbMarkAll";
             },
             label: function label() {
                 if (this.column.label === null) {
@@ -28355,7 +28358,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
         function Column(columnComponent) {
             (0, _classCallCheck3.default)(this, Column);
 
-            var properties = (0, _pick2.default)(columnComponent, ['field', 'label', 'dataType', 'sortable', 'sortBy', 'filterable', 'filterOn', 'hidden', 'formatter', 'cellClass', 'headerClass', 'checkbox']);
+            var properties = (0, _pick2.default)(columnComponent, ['field', 'label', 'dataType', 'sortable', 'sortBy', 'filterable', 'filterOn', 'hidden', 'formatter', 'cellClass', 'headerClass', 'checkbox', 'checkboxId']);
 
             for (var property in properties) {
                 this[property] = columnComponent[property];

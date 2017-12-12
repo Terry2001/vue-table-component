@@ -50,7 +50,7 @@
 
             markAllCheckBoxId(){
 
-                return this.column.field ? this.column.field + "_cbMarkAll" : "cbMarkAll";
+                return this.column.checkboxId ? this.column.checkboxId : "cbMarkAll";
             },
 
             label() {
