@@ -20,6 +20,7 @@
                         :key="row.vueTableComponentInternalRowId"
                         :row="row"
                         :columns="columns"
+                        @row-clicked="rowClicked"
                 ></table-row>
                 </tbody>
             </table>
@@ -180,6 +181,10 @@
 
             async refresh() {
                 await this.mapDataToRows();
+            },
+
+            rowClicked(data){
+                this.$emit("row-clicked", data);
             },
 
         },

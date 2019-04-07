@@ -1,5 +1,5 @@
 <template>
-    <tr>
+    <tr :class="trClass" @click="clicked">
         <table-cell
             v-for="column in visibleColumns"
             :row="row"
@@ -22,6 +22,17 @@
             visibleColumns() {
                 return this.columns.filter(column => ! column.hidden);
             },
+
+            trClass() {
+                return this.row.data.trClass;
+            },
+        },
+
+        methods: {
+            clicked() {
+                this.$emit('row-clicked', this.row.data);
+            },
+
         },
     };
 </script>
